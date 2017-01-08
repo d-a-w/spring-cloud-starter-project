@@ -1,10 +1,10 @@
-package org.exampledriven.eureka.customer.shared;
+package it.dawit.eureka;
 
 import static org.junit.Assert.assertEquals;
 
 import java.util.Map;
 
-import org.exampledriven.eureka.customer.server.EurekaApplication;
+import it.dawit.eureka.EurekaApplication;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Value;
