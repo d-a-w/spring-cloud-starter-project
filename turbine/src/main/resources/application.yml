@@ -1,0 +1,23 @@
+info:
+  component: Turbine
+spring:
+  application:
+    name: turbine
+
+server:
+  port: 8082
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://127.0.0.1:8761/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
+
+turbine:
+  appConfig: order-service,catalog-service
+  clusterNameExpression: "'default'"
+  combine-host-port: true #this allow Turbine multiple processes per host
+
