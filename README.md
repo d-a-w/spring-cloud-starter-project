@@ -1,6 +1,5 @@
-[![Build Status](https://travis-ci.org/ExampleDriven/spring-cloud-hystrix-example.svg?branch=master)](https://travis-ci.org/ExampleDriven/spring-cloud-hystrix-example)
 # spring-cloud-starter-project
-Spring Cloud starter project
+Microservice Architecture with Spring Cloud
 
 This project aims to create a basic spring cloud starter project, based on Netflix stack
  
