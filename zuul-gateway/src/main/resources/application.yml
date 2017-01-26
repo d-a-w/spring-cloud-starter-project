@@ -3,23 +3,36 @@ zuul:
     resource:
       path: /order/**
       sensitiveHeaders:
-      url: http://localhost:8083
+      url: http://${order.host:localhost}:${order.port:8083}
     auth:
       path: /auth/**
       sensitiveHeaders:
-      url: http://localhost:9999
+      url: http://${auth.host:localhost}:${auth.port:9999}
     registry:
       path: /registry/**
       sensitiveHeaders:
-      url: http://localhost:8761
+      url: http://${eureka.host:localhost}:${eureka.port:8761}
     eurekaRes:
       path: /eureka/**
       sensitiveHeaders:
-      url: http://localhost:8761/eureka
+      url: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
     catalog:
       path: /catalog/**
       sensitiveHeaders:
-      url: http://localhost:8091
+      url: http://${catalog.host:localhost}:${catalog.port:8091}
+
+eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+    preferIpAddress: true
+  client:
+    serviceUrl:
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
+    healthcheck:
+      enabled: true
+    lease:
+      duration: 5
 
 spring:
   application:

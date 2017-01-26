@@ -1,0 +1,66 @@
+version: '2'
+services:
+  eureka-server:
+    image: d-a-w/eureka-server
+    hostname: eureka-server
+    ports:
+      - "8761:8761"
+  auth-server:
+    image: d-a-w/auth-server
+    hostname: auth-server
+    links:
+      - eureka-server
+    ports:
+      - "9999:9999"
+    environment:
+     EUREKA_HOST: eureka-server
+     EUREKA_PORT: 8761
+  catalog-service:
+    image: d-a-w/catalog-service
+    hostname: catalog-service
+    links:
+      - eureka-server
+    ports:
+      - "8091:8091"
+    environment:
+     EUREKA_HOST: eureka-server
+     EUREKA_PORT: 8761
+
+  order-service:
+    image: d-a-w/order-service
+    hostname: order-service
+    links:
+      - eureka-server
+    ports:
+      - "8083:8083"
+    environment:
+     EUREKA_HOST: eureka-server
+     EUREKA_PORT: 8761
+  zuul-gateway:
+    image: d-a-w/zuul-gateway
+    hostname: zuul-gateway
+    links:
+      - eureka-server
+    ports:
+      - "8080:8080"
+    environment:
+     EUREKA_HOST: eureka-server
+     EUREKA_PORT: 8761
+     ORDER_HOST: order-service
+     ORDER_PORT: 8083
+     AUTH_HOST: auth-server
+     AUTH_PORT: 9999
+     CATALOG_HOST: catalog-service
+     CATALOG_PORT: 8091
+
+  turbine:
+    image: d-a-w/turbine
+    hostname: zuul-gateway
+    links:
+      - eureka-server
+    ports:
+      - "8082:8082"
+    environment:
+     EUREKA_HOST: eureka-server
+     EUREKA_PORT: 8761
+

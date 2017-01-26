@@ -8,9 +8,13 @@ server:
   port: 8082
 
 eureka:
+  instance:
+    leaseRenewalIntervalInSeconds: 1
+    leaseExpirationDurationInSeconds: 2
+    preferIpAddress: true
   client:
     serviceUrl:
-      defaultZone: http://127.0.0.1:8761/eureka/
+      defaultZone: http://${eureka.host:localhost}:${eureka.port:8761}/eureka/
     healthcheck:
       enabled: true
     lease:
